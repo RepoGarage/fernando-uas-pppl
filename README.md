@@ -11,5 +11,5 @@ npm install
 2. Compile `TS` to `JS` and serve
 ```sh
 npx tsc
-npx serve .
+npx serve -s .
 ```
