@@ -44,11 +44,11 @@ export function render_home() {
         app.innerHTML += `
         <div class="h-full pt-[90px] pb-[100px] pb-4 mt-5 flex flex-row flex-wrap-reverse place-content-center text-center">
             <div id="gs-section">
-                <p id="gs" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold">Supported Brand & Device</p>
-                <p id="gs" class="text-white text-7xl md:text-9xl ml-7 mr-7 mb-10 font-bold">69.420*</p>
+                <p id="bi" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold">Supported Brand & Device</p>
+                <p id="supported" class="text-white text-7xl md:text-9xl ml-7 mr-7 mb-5 font-bold">69.420*</p>
                 <p class="text-xs md:text-base text-gray-500"> From: Vibr*ator, Philips, Samsung, Polytron and other.</p>
             </div>
-            <img class="absolute w-24 h-24 transform translate-y-[200px] md:translate-y-[300px]" src="./static/hug.gif"/>
+            <img class="absolute w-24 h-24 transform translate-y-[175px] md:translate-y-[275px] m-2" src="./static/hug.gif"/>
         </div>
         `;
 
@@ -65,6 +65,9 @@ export function render_home() {
             });
         }
     }
+
+    const supportedElm = document.getElementById("supported");
+    if (supportedElm) supportedElm.innerText = "69.420"; // Change it here...
 
     const gsArrow = document.getElementById("gs-arrow");
     if (gsArrow) gsArrow.addEventListener("click", (_) => {
@@ -109,7 +112,7 @@ export function render_home() {
 
     const yb = document.getElementById("yeah-boi");
     if (yb) {
-        // yb.appendChild(create_default_button("[Learn More]",  () => { window.location.hash = "gs"; }).obj);
+        yb.appendChild(create_default_button("[More Info]",  () => { window.location.hash = "bi"; }).obj);
         yb.appendChild(create_default_button("[Get Started]", () => { window.location.hash = "gs"; }).obj);
     }
 }
