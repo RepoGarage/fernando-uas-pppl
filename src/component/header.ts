@@ -19,14 +19,14 @@ export function create_header(): Component {
     // LINK CONTAINER
     const linkContainer = document.createElement("div");
     container.appendChild(linkContainer);
-    const classForEntry = ["m-2", "hover:font-bold", "hover:text-[#2e2e2e]", "cursor-pointer", "text-base", "transition-colors", "duration-200"];
+    const classForEntry = ["m-2", "hover:font-bold", "hover:text-[#2e2e2e]", "cursor-pointer", "text-lg", "transition-colors", "duration-200"];
 
     // HOME LINK
     const homeLink = document.createElement("a");
     addClassFromArray(homeLink, classForEntry);
     homeLink.setAttribute('data-link', "");
     homeLink.href = "/"
-    homeLink.textContent = "Home";
+    homeLink.innerHTML = "Home";
     linkContainer.appendChild(homeLink);
 
     // ABOUT LINK

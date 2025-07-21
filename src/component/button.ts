@@ -3,7 +3,7 @@ import { Component } from "../interface.js";
 
 export function create_default_button(text: string, click: () => void): Component {
     const btn = document.createElement("button");
-    const allClass = ["mr-5", "p-2", "pl-3",
+    const allClass = ["text-lg", "mr-5", "p-2", "pl-3",
         "pr-3", "rounded-lg", "hover:bg-[#2e2e2e]",
         "hover:text-red-300", "transition-colors",
         "duration-200"];
