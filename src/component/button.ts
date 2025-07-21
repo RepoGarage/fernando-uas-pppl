@@ -5,8 +5,8 @@ export function create_default_button(text: string, click: () => void): Componen
     const btn = document.createElement("button");
     const allClass = ["mr-5", "p-2", "pl-3",
         "pr-3", "rounded-lg", "hover:bg-[#2e2e2e]",
-        "hover:text-red-300", "hover:font-bold",
-        "transition-colors", "duration-200"];
+        "hover:text-red-300", "transition-colors",
+        "duration-200"];
     btn.textContent = text;
     btn.onclick = click;
     addClassFromArray(btn, allClass);
