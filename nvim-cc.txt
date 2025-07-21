@@ -1,1 +1,1 @@
-npx tsc -w & npx serve .
+npx tsc -w & npx serve -s .

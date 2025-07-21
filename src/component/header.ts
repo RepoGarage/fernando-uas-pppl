@@ -1,6 +1,7 @@
-import { addClassFromArray } from "./helper.js";
+import { addClassFromArray } from "../helper.js";
+import { Component } from "../interface.js";
 
-export function create_header(divElm: HTMLElement) {
+export function create_header(): Component {
     // ROOT
     const header = document.createElement("header");
     header.classList.add("bg-red-300", "min-h-20", "flex", "items-center", "p-2", "pl-4", "font-mono");
@@ -23,16 +24,20 @@ export function create_header(divElm: HTMLElement) {
     // HOME LINK
     const homeLink = document.createElement("a");
     addClassFromArray(homeLink, classForEntry);
+    homeLink.setAttribute('data-link', "");
+    homeLink.href = "/"
     homeLink.textContent = "Home";
     linkContainer.appendChild(homeLink);
 
     // ABOUT LINK
     const aboutLink = document.createElement("a");
     addClassFromArray(aboutLink, classForEntry);
+    aboutLink.setAttribute('data-link', "");
+    aboutLink.href = "/about";
     aboutLink.textContent = "About";
     linkContainer.appendChild(aboutLink);
 
     // UPDATE
     header.appendChild(container);
-    divElm.appendChild(header);
+    return { str: header.outerHTML, obj: header }
 }

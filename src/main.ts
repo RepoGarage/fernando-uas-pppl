@@ -1,25 +1,50 @@
-import { create_header } from "./header.js";
-import { addClassFromArray } from "./helper.js";
+import { create_header } from "./component/header.js";
+import { render_home } from "./pages/home.js";
+import { Route } from "./interface.js";
+
+const ROUTES: Route[] = [
+    { route: "/",      callback: () => { render_home(); } },
+    { route: "/about", callback: () => { render_about(); } },
+];
+
+function navigate(path: string) {
+    window.history.pushState({}, '', path);
+    render();
+}
+
+function render() {
+    const path = window.location.pathname;
+    const foundRoute = ROUTES.find(r => r.route === path);
+
+    // Always render header
+    const top = document.getElementById("top");
+    const app = document.getElementById("app");
+    if (top) top.innerHTML = create_header().str;
+    if (app) app.innerHTML = "";
+
+    if (foundRoute) {
+        foundRoute.callback();
+    } else {
+        render_404();
+    }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-    const top = document.getElementById("top");
-    const yb = document.getElementById("yeah-boi");
-
-    if (top) create_header(top);
-    if (yb) {
-        make_button("Learn More", () => {console.log("clicked");}, yb);
-        make_button("Start Here", () => {console.log("clicked");}, yb);
-    }
+    document.addEventListener('click', (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        const link = target.closest(`a[data-link]`) as HTMLAnchorElement | null;
+        if (link && link.origin === window.location.origin) {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            if (href) navigate(href);
+        }
+    });
+    window.addEventListener('popstate', render);
+    render();
 });
 
-function make_button(text: string, click: () => void, target: HTMLElement) {
-    const btn = document.createElement("button");
-    const allClass = ["mr-5", "p-2", "pl-3",
-        "pr-3", "rounded-lg", "hover:bg-[#2e2e2e]",
-        "hover:text-red-300", "hover:font-bold",
-        "transition-colors", "duration-200"];
-    btn.textContent = text;
-    btn.onclick = click;
-    addClassFromArray(btn, allClass);
-    target.appendChild(btn);
+function render_404() {
+}
+
+function render_about() {
 }
