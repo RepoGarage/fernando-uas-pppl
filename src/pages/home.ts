@@ -1,5 +1,5 @@
-import { create_default_button } from "../component/button.js";
-import { navigate } from "../helper.js";
+import { create_default_button, create_button } from "../component/button.js";
+import { addClassFromArray, navigate } from "../helper.js";
 
 export function render_home() {
     const app = document.getElementById("app");
@@ -26,8 +26,8 @@ export function render_home() {
         `;
 
         app.innerHTML += `
-        <div class="bg-[#2e2e2e] h-full pt-[100px] pb-[100px] pb-4 mt-5 flex flex-row flex-wrap-reverse place-content-between">
-            <div>
+        <div class="bg-[#2e2e2e] h-full pt-[90px] pb-[100px] pb-4 mt-5 flex flex-row flex-wrap-reverse place-content-between">
+            <div id="gs-section">
                 <h1 id="gs" class="text-red-300 text-4xl ml-7 mr-7 mb-10 font-bold">Get Started</h1>
                 <ol style="list-style: decimal; margin-left: 1.5rem;">
                     <li class="text-lg mt-4 ml-7 mr-7 p-0">Choose the smart devices you want to connect.</li>
@@ -38,6 +38,17 @@ export function render_home() {
             <div class="mt-20 mb-40 ml-auto mr-auto lg:mr-20 lg:ml-0 lg:mt-0 lg:mb-0 items-center text-center flex">
                 <i class="text-8xl nf nf-fa-person_running"></i>
             </div>
+        </div>
+        `;
+
+        app.innerHTML += `
+        <div class="h-full pt-[90px] pb-[100px] pb-4 mt-5 flex flex-row flex-wrap-reverse place-content-center text-center">
+            <div id="gs-section">
+                <p id="gs" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold">Supported Brand & Device</p>
+                <p id="gs" class="text-white text-7xl md:text-9xl ml-7 mr-7 mb-10 font-bold">69.420*</p>
+                <p class="text-xs md:text-base text-gray-500"> From: Vibr*ator, Philips, Samsung, Polytron and other.</p>
+            </div>
+            <img class="absolute w-24 h-24 transform translate-y-[200px] md:translate-y-[300px]" src="./static/hug.gif"/>
         </div>
         `;
 
@@ -59,6 +70,12 @@ export function render_home() {
     if (gsArrow) gsArrow.addEventListener("click", (_) => {
         window.location.hash = "gs";
     });
+
+    const gsSection = document.getElementById("gs-section");
+    const gsnButton = create_button("Get Started FR Now", () => { navigate("/blabla"); }).obj
+    const newClass = ["mt-7", "ml-7"];
+    addClassFromArray(gsnButton, newClass);
+    gsSection?.appendChild(gsnButton);
 
     const taglineElement = document.getElementById("animated-tagline");
     const taglineText = "Smart Living Starts Here.";
