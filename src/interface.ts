@@ -1,4 +1,5 @@
 export interface Route {
+    title: string,
     route: string,
     callback: () => void,
 }
