@@ -8,6 +8,7 @@ const ROUTES: Route[] = [
 ];
 
 function navigate(path: string) {
+    localStorage.setItem("done_typing", "0");
     window.history.pushState({}, '', path);
     render();
 }

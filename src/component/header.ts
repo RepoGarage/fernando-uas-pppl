@@ -13,7 +13,7 @@ export function create_header(): Component {
     // COMPANY NAME
     const name = document.createElement("p");
     name.textContent = "Slope";
-    name.classList.add("font-bold", "text-xl")
+    name.classList.add("font-bold", "text-xl", "border", "border-solid", "border-[#1e1e1e]", "p-1")
     container.appendChild(name);
 
     // LINK CONTAINER
