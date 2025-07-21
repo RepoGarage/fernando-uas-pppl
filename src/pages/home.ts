@@ -1,4 +1,6 @@
 import { create_default_button } from "../component/button.js";
+import { navigate } from "../helper.js";
+
 export function render_home() {
     const app = document.getElementById("app");
     if (app) {
@@ -19,19 +21,23 @@ export function render_home() {
             <p class="ml-7 mr-7 w-[87%] md:w-[50%] text-justify font-semibold">
                 Live smarter, not harder.
             </p>
-                <h1 class="text-4xl text-center mt-[100px]">↓</h1>
+                <h1 id="gs-arrow" class="text-4xl text-center mt-[100px] cursor-pointer">↓</h1>
         </div>
         `;
 
         app.innerHTML += `
-        <div class="bg-[#2e2e2e] h-full pt-4 pb-4 mt-5">
-            <h1 id="gs" class="text-red-300 text-4xl ml-7 mr-7 mb-4 font-bold p-1">Get Started</h1>
-            <p class="ml-7 mr-7 w-[87%] md:w-[50%] text-justify">
-                Experience the next level of connected living. Our smart home ecosystem integrates lighting, security, climate, and entertainment — all controlled from your phone or voice. Build routines, monitor your home in real-time, and enjoy peace of mind no matter where you are.
-            </p>
-            <p class="ml-7 mr-7 w-[87%] md:w-[50%] text-justify font-semibold">
-                Live smarter, not harder.
-            </p>
+        <div class="bg-[#2e2e2e] h-full pt-[100px] pb-[100px] pb-4 mt-5 flex flex-row flex-wrap-reverse place-content-between">
+            <div>
+                <h1 id="gs" class="text-red-300 text-4xl ml-7 mr-7 mb-10 font-bold">Get Started</h1>
+                <ol style="list-style: decimal; margin-left: 1.5rem;">
+                    <li class="text-lg mt-4 ml-7 mr-7 p-0">Choose the smart devices you want to connect.</li>
+                    <li class="text-lg mt-4 ml-7 mr-7 p-0">Download our app and link your home network.</li>
+                    <li class="text-lg mt-4 ml-7 mr-7 p-0">Customize routines and control everything from your phone or voice.</li>
+                </ol>
+            </div>
+            <div class="mt-20 mb-40 ml-auto mr-auto lg:mr-20 lg:ml-0 lg:mt-0 lg:mb-0 items-center text-center flex">
+                <i class="text-8xl nf nf-fa-person_running"></i>
+            </div>
         </div>
         `;
 
@@ -48,6 +54,11 @@ export function render_home() {
             });
         }
     }
+
+    const gsArrow = document.getElementById("gs-arrow");
+    if (gsArrow) gsArrow.addEventListener("click", (_) => {
+        window.location.hash = "gs";
+    });
 
     const taglineElement = document.getElementById("animated-tagline");
     const taglineText = "Smart Living Starts Here.";
