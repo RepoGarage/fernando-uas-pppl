@@ -100,31 +100,36 @@ export async function render_home() {
             name: "It's Just a Talk",
             icon: "nf-md-microphone",
             desc: "Control your appliances simply by speaking.",
+            long_desc: "With advanced voice recognition technology, you can control your entire smart home ecosystem without lifting a finger. Whether you're turning on the lights, adjusting the thermostat, or starting your coffee maker, all it takes is a simple voice command. Compatible with popular voice assistants like Google Assistant, Amazon Alexa, and Siri, this feature ensures hands-free convenience for every member of your household.",
         },
         {
             name: "Smart Scheduling",
             icon: "nf-md-calendar",
             desc: "Automate your lights, climate, and routines with customizable schedules.",
+            long_desc: "Create and manage daily, weekly, or custom schedules for all your smart devices. Wake up to a warm room with pre-heated settings, ensure your lights turn off automatically at bedtime, or set your air conditioning to save power while you're away. Smart Scheduling adapts to your lifestyle, helps reduce energy usage, and ensures your home is always in sync with your routine — even when you're not around.",
         },
         {
             name: "Secure Monitoring",
             icon: "nf-md-shield_home",
             desc: "Keep your home safe with real-time monitoring and instant alerts.",
+            long_desc: "Enjoy 24/7 surveillance of your home with motion sensors, smart cameras, and door/window monitoring systems. Receive real-time notifications for any unusual activity, access live camera feeds from your mobile device, and store video clips securely in the cloud. Whether you're at work, on vacation, or just in another room, stay fully aware of what’s happening at home and respond instantly to any security concerns.",
         },
         // {
         //     name: "Energy Efficiency",
         //     icon: "nf-md-flash",
         //     desc: "Save on bills with intelligent energy usage tracking and suggestions.",
-        //     callback: () => {}
+        //     long_desc: "Gain insights into your energy consumption with detailed reports and usage analytics. Track which devices use the most power, identify wasteful patterns, and receive personalized tips on how to reduce consumption. Combined with automation and smart scheduling, our system helps you significantly cut energy bills while minimizing your carbon footprint, making your home both efficient and environmentally friendly.",
         // }
     ];
+
+
 
     const cardSectionElm = document.getElementById("card-feature");
     for (let i = 0; i < featureSet.length; i++) {
         const current = featureSet[i];
         if (cardSectionElm) {
             const newCard = create_card().obj;
-            newCard.classList.add("flex", "flex-col", "place-content-between", "text-center", "font-bold", "m-5", "p-3");
+            newCard.classList.add("flex", "flex-col", "place-content-between", "text-center", "font-bold", "m-5", "p-3", "cursor-pointer");
 
             const cardName = document.createElement("p");
             cardName.textContent = current.name;
@@ -144,6 +149,33 @@ export async function render_home() {
             newCard.addEventListener("click", () => {
                 if (modal.classList.contains("hidden")) {
                     modal.classList.remove("hidden");
+                    const ow = modal.querySelector("#modal-content");
+                    if (ow) {
+                        const insideContainer = document.createElement("div");
+                        insideContainer.classList.add("p-5", "overflow-scroll", "max-h-full", "flex", "flex-col", "h-full");
+
+                        ow.innerHTML = "";
+                        const title = document.createElement("p");
+                        title.textContent = current.name;
+                        title.classList.add("text-red-300", "text-2xl", "font-bold", "mb-5");
+                        insideContainer.appendChild(title);
+
+                        const desc = document.createElement("p");
+                        desc.textContent = current.long_desc;
+                        desc.classList.add("text-justify");
+                        insideContainer.appendChild(desc);
+
+                        const br = document.createElement("div");
+                        br.classList.add("h-5", "min-h-5");
+                        insideContainer.appendChild(br);
+
+                        const info = document.createElement("p");
+                        info.textContent = "Click anywhere outside of this box to close it.";
+                        info.classList.add("mt-auto", "text-gray-300", "italic", "text-xs", "text-right");
+                        insideContainer.appendChild(info);
+
+                        ow.appendChild(insideContainer);
+                    }
                 } else {
                     modal.classList.add("hidden");
                 }

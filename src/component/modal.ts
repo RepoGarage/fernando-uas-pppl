@@ -9,10 +9,11 @@ export function create_modal(): Component {
     outerWrapper.appendChild(bgDimmer);
 
     const wrapper = document.createElement("div");
+    wrapper.id = "modal-content";
     wrapper.classList.add(
         "fixed", "top-1/2", "left-1/2",
         "-translate-x-1/2", "-translate-y-1/2",
-        "bg-red-500", "w-[70%]", "h-[60%]", "z-[101]",
+        "bg-[#3e3e3e]", "w-[60%]", "h-[40%]", "z-[101]",
         "shadow-lg", "rounded"
     );
     outerWrapper.appendChild(wrapper);
