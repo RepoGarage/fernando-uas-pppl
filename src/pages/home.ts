@@ -1,11 +1,13 @@
 import { create_default_button, create_button } from "../component/button.js";
 import { create_card } from "../component/card.js";
+import { create_modal } from "../component/modal.js";
 import { addClassFromArray, navigate } from "../helper.js";
 import { counterData } from "../data/counter.js";
 // import { reviewData } from "../data/reviews.js";
 
 export async function render_home() {
     const app = document.getElementById("app");
+    const modal = create_modal().obj;
     if (app) {
         // Top header that include until the arrow
         app.innerHTML = `
@@ -89,28 +91,31 @@ export async function render_home() {
                 }, 5);
             });
         }
+
+        app.appendChild(modal);
     }
 
     const featureSet = [
         {
             name: "It's Just a Talk",
             icon: "nf-md-microphone",
-            desc: "Control your appliances simply by speaking."
+            desc: "Control your appliances simply by speaking.",
         },
         {
             name: "Smart Scheduling",
             icon: "nf-md-calendar",
-            desc: "Automate your lights, climate, and routines with customizable schedules."
+            desc: "Automate your lights, climate, and routines with customizable schedules.",
         },
         {
             name: "Secure Monitoring",
             icon: "nf-md-shield_home",
-            desc: "Keep your home safe with real-time monitoring and instant alerts."
+            desc: "Keep your home safe with real-time monitoring and instant alerts.",
         },
         // {
         //     name: "Energy Efficiency",
         //     icon: "nf-md-flash",
-        //     desc: "Save on bills with intelligent energy usage tracking and suggestions."
+        //     desc: "Save on bills with intelligent energy usage tracking and suggestions.",
+        //     callback: () => {}
         // }
     ];
 
@@ -136,6 +141,13 @@ export async function render_home() {
             newCard.appendChild(cardDescription);
 
             cardSectionElm.appendChild(newCard);
+            newCard.addEventListener("click", () => {
+                if (modal.classList.contains("hidden")) {
+                    modal.classList.remove("hidden");
+                } else {
+                    modal.classList.add("hidden");
+                }
+            });
         }
     }
 
