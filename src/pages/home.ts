@@ -63,7 +63,7 @@ export async function render_home() {
         app.innerHTML += `
         <div class="bg-[#2e2e2e] h-full pt-[90px] pb-[100px] pb-4 mt-5">
             <p id="bi" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">Feature</p>
-            <div id="card-feature" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto w-fit">
+            <div id="card-feature" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center lg:mx-auto lg:w-fit">
             </div>
         </div>
         `;
