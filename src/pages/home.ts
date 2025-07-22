@@ -1,8 +1,9 @@
 import { create_default_button, create_button } from "../component/button.js";
 import { create_card } from "../component/card.js";
-import { addClassFromArray, navigate, loadJSON } from "../helper.js";
+import { addClassFromArray, navigate } from "../helper.js";
+import { counterData } from "../data/counter.js";
 
-export function render_home() {
+export async function render_home() {
     const app = document.getElementById("app");
     if (app) {
         // Top header that include until the arrow
@@ -94,8 +95,8 @@ export function render_home() {
 
     const supportedElm = document.getElementById("supported");
     if (supportedElm) {
-        const value: any = loadJSON("/data/counter.json"); //
-        supportedElm.innerText = "69.420";
+        const formatted = new Intl.NumberFormat('de-DE').format(counterData.counter);
+        supportedElm.innerText = String(formatted);
     }
 
     const gsArrow = document.getElementById("gs-arrow");
