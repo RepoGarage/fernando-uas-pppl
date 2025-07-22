@@ -162,7 +162,7 @@ export async function render_home() {
 
                         const desc = document.createElement("p");
                         desc.textContent = current.long_desc;
-                        desc.classList.add("text-justify");
+                        desc.classList.add("md:text-justify");
                         insideContainer.appendChild(desc);
 
                         const br = document.createElement("div");
@@ -171,7 +171,7 @@ export async function render_home() {
 
                         const info = document.createElement("p");
                         info.textContent = "Click anywhere outside of this box to close it.";
-                        info.classList.add("mt-auto", "text-gray-300", "italic", "text-xs", "text-right");
+                        info.classList.add("mt-auto", "text-gray-400", "italic", "text-xs", "text-right");
                         insideContainer.appendChild(info);
 
                         ow.appendChild(insideContainer);
