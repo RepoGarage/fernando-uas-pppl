@@ -31,3 +31,11 @@ export function render() {
         render_404();
     }
 }
+
+export async function loadJSON(path: string):Promise<any> {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+
+    const data = await res.json();
+    return data
+}

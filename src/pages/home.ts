@@ -1,9 +1,11 @@
 import { create_default_button, create_button } from "../component/button.js";
-import { addClassFromArray, navigate } from "../helper.js";
+import { create_card } from "../component/card.js";
+import { addClassFromArray, navigate, loadJSON } from "../helper.js";
 
 export function render_home() {
     const app = document.getElementById("app");
     if (app) {
+        // Top header that include until the arrow
         app.innerHTML = `
         <div class="w-full h-[350px] overflow-hidden">
                 <p class="absolute font-bold font-mono z-3 w-full text-center p-1">You Found Me :P</p>
@@ -25,6 +27,7 @@ export function render_home() {
         </div>
         `;
 
+        // Get started section
         app.innerHTML += `
         <div class="bg-[#2e2e2e] h-full pt-[90px] pb-[100px] pb-4 mt-5 flex flex-row flex-wrap-reverse place-content-between">
             <div id="gs-section">
@@ -35,20 +38,31 @@ export function render_home() {
                     <li class="text-lg mt-4 ml-7 mr-7 p-0">Customize routines and control everything from your phone or voice.</li>
                 </ol>
             </div>
-            <div class="mt-20 mb-40 ml-auto mr-auto lg:mr-20 lg:ml-0 lg:mt-0 lg:mb-0 items-center text-center flex">
+            <div class="mt-20 mb-40 ml-auto mr-auto lg:mr-20 lg:ml-0 md:mt-0 md:mb-0 items-center text-center flex">
                 <i class="text-8xl nf nf-fa-person_running"></i>
             </div>
         </div>
         `;
 
+        // INFO START HERE //
+        // Supported brand and device
         app.innerHTML += `
-        <div class="h-full pt-[90px] pb-[100px] pb-4 mt-5 flex flex-row flex-wrap-reverse place-content-center text-center">
+        <div class="h-full pt-[90px] pb-[100px] pb-4 mt-5 flex flex-col flex-wrap-reverse place-content-center text-center items-center">
             <div id="gs-section">
-                <p id="bi" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold">Supported Brand & Device</p>
+                <p id="bi" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-5 font-bold">Supported Brand & Device</p>
                 <p id="supported" class="text-white text-7xl md:text-9xl ml-7 mr-7 mb-5 font-bold">69.420*</p>
-                <p class="text-xs md:text-base text-gray-500"> From: Vibr*ator, Philips, Samsung, Polytron and other.</p>
+                <p class="text-xs mb-4 md:text-base text-gray-500"> From: Vibr*ator, Philips, Samsung, Polytron and other.</p>
             </div>
-            <img class="absolute w-24 h-24 transform translate-y-[175px] md:translate-y-[275px] m-2" src="./static/hug.gif"/>
+            <img class="relative w-24 h-24 m-2" src="./static/hug.gif"/>
+        </div>
+        `;
+
+        // Card section
+        app.innerHTML += `
+        <div class="bg-[#2e2e2e] h-full pt-[90px] pb-[100px] pb-4 mt-5">
+            <p id="bi" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">What people says</p>
+            <div id="card-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mx-auto w-fit">
+            </div>
         </div>
         `;
 
@@ -66,8 +80,23 @@ export function render_home() {
         }
     }
 
+    const cardSectionElm = document.getElementById("card-section");
+    for (let i = 0; i < 4; i++) {
+        if (cardSectionElm) {
+            const newCard = create_card().obj;
+            const cardName = document.createElement("p");
+            cardName.textContent = "Your Mom";
+            newCard.appendChild(cardName);
+            newCard.classList.add("text-center", "font-bold");
+            cardSectionElm.appendChild(newCard);
+        }
+    }
+
     const supportedElm = document.getElementById("supported");
-    if (supportedElm) supportedElm.innerText = "69.420"; // Change it here...
+    if (supportedElm) {
+        const value: any = loadJSON("/data/counter.json"); //
+        supportedElm.innerText = "69.420";
+    }
 
     const gsArrow = document.getElementById("gs-arrow");
     if (gsArrow) gsArrow.addEventListener("click", (_) => {
