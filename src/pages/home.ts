@@ -2,6 +2,7 @@ import { create_default_button, create_button } from "../component/button.js";
 import { create_card } from "../component/card.js";
 import { addClassFromArray, navigate } from "../helper.js";
 import { counterData } from "../data/counter.js";
+// import { reviewData } from "../data/reviews.js";
 
 export async function render_home() {
     const app = document.getElementById("app");
@@ -58,14 +59,23 @@ export async function render_home() {
         </div>
         `;
 
-        // Card section
+        // Card section: Feature
         app.innerHTML += `
         <div class="bg-[#2e2e2e] h-full pt-[90px] pb-[100px] pb-4 mt-5">
-            <p id="bi" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">What people says</p>
-            <div id="card-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mx-auto w-fit">
+            <p id="bi" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">Feature</p>
+            <div id="card-feature" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto w-fit">
             </div>
         </div>
         `;
+
+        // Card section
+        // app.innerHTML += `
+        // <div class="bg-[#2e2e2e] h-full pt-[90px] pb-[100px] pb-4 mt-5">
+        //     <p id="bi" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">What people says</p>
+        //     <div id="card-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mx-auto w-fit">
+        //     </div>
+        // </div>
+        // `;
 
         const heroImage = app.querySelector('img');
         if (heroImage) {
@@ -81,17 +91,93 @@ export async function render_home() {
         }
     }
 
-    const cardSectionElm = document.getElementById("card-section");
-    for (let i = 0; i < 4; i++) {
+    const featureSet = [
+        {
+            name: "It's Just a Talk",
+            icon: "nf-md-microphone",
+            desc: "Control your appliances simply by speaking."
+        },
+        {
+            name: "Smart Scheduling",
+            icon: "nf-md-calendar",
+            desc: "Automate your lights, climate, and routines with customizable schedules."
+        },
+        {
+            name: "Secure Monitoring",
+            icon: "nf-md-shield_home",
+            desc: "Keep your home safe with real-time monitoring and instant alerts."
+        },
+        // {
+        //     name: "Energy Efficiency",
+        //     icon: "nf-md-flash",
+        //     desc: "Save on bills with intelligent energy usage tracking and suggestions."
+        // }
+    ];
+
+    const cardSectionElm = document.getElementById("card-feature");
+    for (let i = 0; i < featureSet.length; i++) {
+        const current = featureSet[i];
         if (cardSectionElm) {
             const newCard = create_card().obj;
+            newCard.classList.add("flex", "flex-col", "place-content-between", "text-center", "font-bold", "m-5", "p-3");
+
             const cardName = document.createElement("p");
-            cardName.textContent = "Your Mom";
+            cardName.textContent = current.name;
+            cardName.classList.add("text-red-300", "text-lg", "font-bold");
             newCard.appendChild(cardName);
-            newCard.classList.add("text-center", "font-bold");
+
+            const cardIcon = document.createElement("i");
+            cardIcon.classList.add("nf", current.icon, "text-3xl", "pt-2", "text-white", "text-shadow-lg/30");
+            newCard.appendChild(cardIcon);
+
+            const cardDescription = document.createElement("p");
+            cardDescription.textContent = current.desc;
+            cardDescription.classList.add("pt-3", "p-1", "text-balance", "font-mono", "text-sm", "font-medium");
+            newCard.appendChild(cardDescription);
+
             cardSectionElm.appendChild(newCard);
         }
     }
+
+    // const cardSectionElm = document.getElementById("card-feature");
+    // for (let i = 0; i < reviewData.length; i++) {
+    //     const c = reviewData[i];
+    //     if (cardSectionElm) {
+    //         const newCard = create_card().obj;
+    //         newCard.classList.add("flex", "flex-col", "place-content-between");
+    //
+    //         const upperDiv = document.createElement("div");
+    //
+    //         const cardName = document.createElement("p");
+    //         cardName.textContent = c.name;
+    //         cardName.classList.add("text-red-300");
+    //         upperDiv.appendChild(cardName);
+    //
+    //         const cardReview = document.createElement("p");
+    //         cardReview.textContent = c.review;
+    //         cardReview.classList.add("pt-3", "p-1", "text-balance", "font-mono");
+    //         upperDiv.appendChild(cardReview);
+    //
+    //         newCard.appendChild(upperDiv);
+    //
+    //         const lowerDiv = document.createElement("div");
+    //         lowerDiv.classList.add("flex", "flex-row", "text-center", "items-center", "place-content-center");
+    //
+    //         const ratingIcon = document.createElement("i");
+    //         ratingIcon.classList.add("nf", "nf-md-star", "text-base", "pt-2");
+    //         lowerDiv.appendChild(ratingIcon);
+    //
+    //         const cardRating = document.createElement("p");
+    //         cardRating.textContent = `${String(c.score)}/5`;
+    //         cardRating.classList.add("pl-2", "pt-3", "p-1", "text-balance", "font-mono");
+    //         lowerDiv.appendChild(cardRating);
+    //
+    //         newCard.appendChild(lowerDiv);
+    //
+    //         newCard.classList.add("text-center", "font-bold");
+    //         cardSectionElm.appendChild(newCard);
+    //     }
+    // }
 
     const supportedElm = document.getElementById("supported");
     if (supportedElm) {
