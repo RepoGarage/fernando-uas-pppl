@@ -75,7 +75,7 @@ export async function render_home() {
         <div class="bg-[#1e1e1e] h-full pt-[90px] pb-[100px] pb-4 mt-5">
             <p id="rv" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">What people says</p>
             <div id="card-review"
-                 class="w-full flex flex-row gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4">
+                 class="mx-auto w-[80%] flex flex-row gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4">
             </div>
         </div>
         `;
@@ -245,9 +245,7 @@ export async function render_home() {
         }
     }
 
-    let currentIndex = 0;
     const cardContainer = document.getElementById("card-review");
-
     if (cardContainer) {
         const cards = cardContainer.children;
         let currentIndex = 0;
@@ -259,10 +257,10 @@ export async function render_home() {
             if (card) {
                 cardContainer.scrollTo({
                     behavior: "smooth",
-                    left: card.offsetLeft
+                    left: card.offsetLeft / 2
                 });
             }
-        }, 3000); // 3 seconds
+        }, 5000);
     }
 
     const supportedElm = document.getElementById("supported");
