@@ -53,6 +53,14 @@ export function create_header(): Component {
     aboutLink.textContent = "About";
     linkContainer.appendChild(aboutLink);
 
+    // ABOUT LINK
+    const contactLink = document.createElement("a");
+    addClassFromArray(contactLink, classForEntry);
+    contactLink.setAttribute('data-link', "");
+    contactLink.href = "/contact";
+    contactLink.textContent = "Contact";
+    linkContainer.appendChild(contactLink);
+
     // UPDATE
     header.appendChild(container);
     return { str: header.outerHTML, obj: header }

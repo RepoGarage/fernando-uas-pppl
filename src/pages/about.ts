@@ -1,4 +1,5 @@
 import { addClassFromArray } from "../helper.js";
+import { navigate } from "../helper.js";
 
 export function render_about() {
     const app = document.getElementById("app");
@@ -173,10 +174,11 @@ export function render_about() {
     const bwrapper = document.createElement("div");
     bwrapper.classList.add("text-center", "w-full");
     const classForEntry = ["p-4", "hover:text-[#2e2e2e]", "hover:bg-red-300", "cursor-pointer", "text-lg", "transition-colors", "duration-200", "text-center"];
-    const portofolioLink = document.createElement("a");
+    const portofolioLink = document.createElement("button");
     addClassFromArray(portofolioLink, classForEntry);
-    portofolioLink.setAttribute('data-link', "");
-    portofolioLink.href = "/portofolio"
+    portofolioLink.addEventListener("click",
+        () => { navigate("/portofolio"); }
+    )
     portofolioLink.innerHTML = "Checkout more of our Stories here.";
 
     bwrapper.appendChild(portofolioLink);
