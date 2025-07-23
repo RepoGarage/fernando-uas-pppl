@@ -3,7 +3,7 @@ import { create_card } from "../component/card.js";
 import { create_modal } from "../component/modal.js";
 import { addClassFromArray, navigate } from "../helper.js";
 import { counterData } from "../data/counter.js";
-// import { reviewData } from "../data/reviews.js";
+import { reviewData } from "../data/reviews.js";
 
 export async function render_home() {
     const app = document.getElementById("app");
@@ -64,20 +64,21 @@ export async function render_home() {
         // Card section: Feature
         app.innerHTML += `
         <div class="bg-[#2e2e2e] h-full pt-[90px] pb-[100px] pb-4 mt-5">
-            <p id="bi" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">Feature</p>
+            <p id="ft" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">Feature</p>
             <div id="card-feature" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center lg:mx-auto lg:w-fit">
             </div>
         </div>
         `;
 
-        // Card section
-        // app.innerHTML += `
-        // <div class="bg-[#2e2e2e] h-full pt-[90px] pb-[100px] pb-4 mt-5">
-        //     <p id="bi" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">What people says</p>
-        //     <div id="card-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mx-auto w-fit">
-        //     </div>
-        // </div>
-        // `;
+        // Card section: Review
+        app.innerHTML += `
+        <div class="bg-[#1e1e1e] h-full pt-[90px] pb-[100px] pb-4 mt-5">
+            <p id="rv" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">What people says</p>
+            <div id="card-review"
+                 class="w-full flex flex-row gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4">
+            </div>
+        </div>
+        `;
 
         const heroImage = app.querySelector('img');
         if (heroImage) {
@@ -114,12 +115,6 @@ export async function render_home() {
             desc: "Keep your home safe with real-time monitoring and instant alerts.",
             long_desc: "Enjoy 24/7 surveillance of your home with motion sensors, smart cameras, and door/window monitoring systems. Receive real-time notifications for any unusual activity, access live camera feeds from your mobile device, and store video clips securely in the cloud. Whether you're at work, on vacation, or just in another room, stay fully aware of what’s happening at home and respond instantly to any security concerns.",
         },
-        // {
-        //     name: "Energy Efficiency",
-        //     icon: "nf-md-flash",
-        //     desc: "Save on bills with intelligent energy usage tracking and suggestions.",
-        //     long_desc: "Gain insights into your energy consumption with detailed reports and usage analytics. Track which devices use the most power, identify wasteful patterns, and receive personalized tips on how to reduce consumption. Combined with automation and smart scheduling, our system helps you significantly cut energy bills while minimizing your carbon footprint, making your home both efficient and environmentally friendly.",
-        // }
     ];
 
 
@@ -183,45 +178,85 @@ export async function render_home() {
         }
     }
 
-    // const cardSectionElm = document.getElementById("card-feature");
-    // for (let i = 0; i < reviewData.length; i++) {
-    //     const c = reviewData[i];
-    //     if (cardSectionElm) {
-    //         const newCard = create_card().obj;
-    //         newCard.classList.add("flex", "flex-col", "place-content-between");
-    //
-    //         const upperDiv = document.createElement("div");
-    //
-    //         const cardName = document.createElement("p");
-    //         cardName.textContent = c.name;
-    //         cardName.classList.add("text-red-300");
-    //         upperDiv.appendChild(cardName);
-    //
-    //         const cardReview = document.createElement("p");
-    //         cardReview.textContent = c.review;
-    //         cardReview.classList.add("pt-3", "p-1", "text-balance", "font-mono");
-    //         upperDiv.appendChild(cardReview);
-    //
-    //         newCard.appendChild(upperDiv);
-    //
-    //         const lowerDiv = document.createElement("div");
-    //         lowerDiv.classList.add("flex", "flex-row", "text-center", "items-center", "place-content-center");
-    //
-    //         const ratingIcon = document.createElement("i");
-    //         ratingIcon.classList.add("nf", "nf-md-star", "text-base", "pt-2");
-    //         lowerDiv.appendChild(ratingIcon);
-    //
-    //         const cardRating = document.createElement("p");
-    //         cardRating.textContent = `${String(c.score)}/5`;
-    //         cardRating.classList.add("pl-2", "pt-3", "p-1", "text-balance", "font-mono");
-    //         lowerDiv.appendChild(cardRating);
-    //
-    //         newCard.appendChild(lowerDiv);
-    //
-    //         newCard.classList.add("text-center", "font-bold");
-    //         cardSectionElm.appendChild(newCard);
-    //     }
-    // }
+    const cardRevDiv = document.getElementById("card-review");
+    for (let i = 0; i < reviewData.length; i++) {
+        const c = reviewData[i];
+        if (cardRevDiv) {
+            cardRevDiv.style.flexWrap = "nowrap";
+
+            const newCard = create_card().obj;
+            newCard.classList.remove("lg:w-[240px]");
+            newCard.classList.remove("s:w-[160px]");
+            newCard.classList.add("flex", "flex-col", "place-content-between", "s:w-[80%]", "snap-start");
+
+            newCard.style.minWidth = "40%";
+            newCard.style.scrollSnapAlign = "start";
+
+            const upperDiv = document.createElement("div");
+
+            const cardName = document.createElement("p");
+            cardName.textContent = c.name;
+            cardName.classList.add("text-red-300");
+            upperDiv.appendChild(cardName);
+
+            const cardReview = document.createElement("p");
+            cardReview.textContent = c.review;
+            cardReview.classList.add("pt-3", "p-1", "text-balance", "font-mono");
+            upperDiv.appendChild(cardReview);
+
+            newCard.appendChild(upperDiv);
+
+            const lowerDiv = document.createElement("div");
+            lowerDiv.classList.add("flex", "flex-row", "text-center", "items-center", "place-content-center");
+
+            const ratingIcon = document.createElement("i");
+            ratingIcon.classList.add("nf", "nf-md-star", "text-base", "pt-2");
+            lowerDiv.appendChild(ratingIcon);
+
+            const cardRating = document.createElement("p");
+            cardRating.textContent = `${String(c.score)}/5`;
+            switch (c.score) {
+                case 1:
+                    cardRating.title = "Oops..";
+                    break;
+                case 2:
+                    cardRating.title = "Fine i guess..";
+                    break;
+                case 3:
+                    cardRating.title = "Ok";
+                    break;
+                case 4:
+                    cardRating.title = "Nice Shot.";
+                    break;
+                case 5:
+                    cardRating.title = "Awesome!";
+                    break;
+                default:
+                    cardRating.title = "IDK MAN";
+                    break;
+            }
+            cardRating.classList.add("pl-2", "pt-3", "p-1", "text-balance", "font-mono");
+            lowerDiv.appendChild(cardRating);
+
+            newCard.appendChild(lowerDiv);
+
+            newCard.classList.add("text-center", "font-bold");
+            cardRevDiv.appendChild(newCard);
+        }
+    }
+    let currentIndex = 0;
+    const cardContainer = document.getElementById("card-review");
+
+    if (cardContainer) {
+        const cards = cardContainer.children;
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            const card = cards[currentIndex];
+            if (card) {
+                card.scrollIntoView({ behavior: "smooth", inline: "start" });
+            }
+        }, 3000); // 3 seconds
+    }
 
     const supportedElm = document.getElementById("supported");
     if (supportedElm) {
