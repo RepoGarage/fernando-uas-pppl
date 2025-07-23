@@ -16,11 +16,14 @@ export function render_about() {
     .rotate-y-180 {
         transform: rotateY(180deg);
     }
+    .group:hover .group-hover\\:rotate-y-180 {
+        transform: rotateY(180deg);
+    }
     `;
     app.appendChild(newStyle);
 
     const wrapper = document.createElement("div");
-    wrapper.classList.add("p-6", "bg-[#1e1e1e]", "text-white", "space-y-20");
+    wrapper.classList.add("p-6", "bg-[#1e1e1e]", "text-[#fafafa]", "space-y-20");
 
     // --- 1. Company Story with Timeline ---
     const timeline = document.createElement("div");
@@ -45,7 +48,7 @@ export function render_about() {
     for (const item of timelineItems) {
         const box = document.createElement("div");
         box.classList.add(
-            "border-l-4", "border-red-500", "pl-4", "opacity-0", "translate-x-[-20px]", "transition-all", "duration-700", "mt-5"
+            "border-l-4", "border-red-500", "pl-4", "opacity-0", "translate-x-[-20px]", "transition-all", "duration-700", "mt-5",
         );
         box.innerHTML = `<p class="text-3xl font-semibold text-red-300">${item.year}</p>
         <p class="ml-1">${item.text}</p>
@@ -53,50 +56,51 @@ export function render_about() {
         timelineContainer.appendChild(box);
     }
 
-    // THIS DIDNT WORK //
-    // IntersectionObserver to animate timeline
+    // Fixed IntersectionObserver to animate timeline
     const observer = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.remove("opacity-0", "translate-x-[-20px]");
                 entry.target.classList.add("opacity-100", "translate-x-0");
             }
-        }
+        });
     }, { threshold: 0.1 });
 
     setTimeout(() => {
-        timelineContainer.childNodes.forEach(el => observer.observe(el as Element));
+        // Fixed: Properly access child nodes and cast them
+        Array.from(timelineContainer.children).forEach(el => observer.observe(el));
     }, 100);
 
     timeline.appendChild(timelineContainer);
     wrapper.appendChild(timeline);
 
-    // --- 2. Team Member Cards ---
+    // --- 2. Team Member Cards --- (Fixed section)
     const teamSection = document.createElement("div");
     teamSection.classList.add("bg-[#2e2e2e]", "p-5", "rounded-xl");
-    teamSection.innerHTML = `<h2 class="text-3xl font-bold text-center mb-8 text-red-300">Meet the Team</h2>`;
+    teamSection.innerHTML = `<h2 class="text-4xl font-bold text-center mb-8 text-red-300">Meet the Team</h2>`;
     const teamGrid = document.createElement("div");
     teamGrid.classList.add("grid", "grid-cols-1", "sm:grid-cols-2", "md:grid-cols-3", "gap-8");
 
     const team = [
-        { name: "Me", role: "CEO" },
-        { name: "Myself", role: "CTO" },
-        { name: "Tyself", role: "CMO" }
+        { name: "Me",     role: "CEO", hidden_info: "I" },
+        { name: "Myself", role: "CEO of the CEO", hidden_info: "use" },
+        { name: "Tyself", role: "CEO of the CEO of the CEO", hidden_info: "Arch BTW." }
     ];
 
     for (const member of team) {
         const card = document.createElement("div");
-        card.classList.add("bg-[#2e2e2e]", "rounded-xl", "p-6", "cursor-pointer", "group", "relative", "perspective");
+        card.classList.add("perspective", "bg-[#2e2e2e]", "rounded-xl", "p-6", "cursor-pointer", "group", "relative");
 
+        // Fixed: Correct class application for the flip card
         card.innerHTML = `
-        <div class="transition-transform duration-500 group-hover:rotate-y-180 transform-style-preserve-3d relative w-full h-40">
-        <div class="absolute inset-0 backface-hidden flex flex-col justify-center items-center">
-        <p class="text-xl font-bold">${member.name}</p>
-        <p>${member.role}</p>
-        </div>
-        <div class="absolute inset-0 rotate-y-180 backface-hidden flex justify-center items-center bg-red-500 text-black font-bold">
-        Contact me!
-        </div>
+        <div class="transition-transform duration-500 transform-style-preserve-3d relative w-full h-40 group-hover:rotate-y-180">
+            <div class="absolute inset-0 backface-hidden flex flex-col justify-center items-center">
+                <p class="text-xl font-bold">${member.name}</p>
+                <p>${member.role}</p>
+            </div>
+            <div class="absolute inset-0 backface-hidden rotate-y-180 flex justify-center items-center bg-red-300 text-[#1e1e1e] font-bold rounded-xl">
+                ${member.hidden_info}
+            </div>
         </div>
         `;
         teamGrid.appendChild(card);
@@ -105,18 +109,16 @@ export function render_about() {
     teamSection.appendChild(teamGrid);
     wrapper.appendChild(teamSection);
 
-    // THIS DIDNT WORK END //
-
     // --- 3. Company Statistics with Animated Counters ---
     const stats = document.createElement("div");
-    stats.classList.add("text-center", "space-y-8");
+    stats.classList.add("text-center", "mt-5", "bg-[#2e2e2e]", "p-10", "pb-12", "rounded-lg");
 
     stats.innerHTML = `
-    <h2 class="text-3xl font-bold">Our Impact</h2>
-    <div class="flex justify-around text-2xl font-mono">
-    <div><p id="stat-users">0</p><p>Users</p></div>
-    <div><p id="stat-downloads">0</p><p>Downloads</p></div>
-    <div><p id="stat-teams">0</p><p>Teams</p></div>
+    <h2 class="text-4xl font-bold text-red-300 mb-10">Our Impact</h2>
+    <div class="flex justify-around text-2xl font-mono pt-10 pb-10">
+        <div><p id="stat-users">0</p>     <p class="font-bold text-red-300 text-xl">Users</p></div>
+        <div><p id="stat-downloads">0</p> <p class="font-bold text-red-300 text-xl">Downloads</p></div>
+        <div><p id="stat-teams">0</p>     <p class="font-bold text-red-300 text-xl">Teams</p></div>
     </div>
     `;
 
@@ -151,13 +153,13 @@ export function render_about() {
     ];
 
     const valuesSection = document.createElement("div");
-    valuesSection.innerHTML = `<h2 class="text-3xl font-bold text-center mb-8">Our Values</h2>`;
+    valuesSection.innerHTML = `<h2 class="text-4xl font-bold text-center mb-8 text-red-300 pb-2">Our Values</h2>`;
     const valueGrid = document.createElement("div");
     valueGrid.classList.add("grid", "sm:grid-cols-2", "md:grid-cols-3", "gap-6");
 
     for (const val of values) {
         const box = document.createElement("div");
-        box.classList.add("bg-[#2e2e2e]", "p-6", "rounded-lg", "hover:bg-red-500", "transition-colors");
+        box.classList.add("bg-[#2e2e2e]", "p-6", "rounded-lg", "hover:bg-red-300", "hover:text-[#1e1e1e]", "transition-all", "transition-colors", "duration-300", "cursor-default");
         box.innerHTML = `<p class="text-xl font-bold">${val.title}</p><p class="mt-2">${val.desc}</p>`;
         valueGrid.appendChild(box);
     }
@@ -168,4 +170,3 @@ export function render_about() {
     // --- Attach to DOM ---
     app.appendChild(wrapper);
 }
-

@@ -53,7 +53,7 @@ export async function render_home() {
         app.innerHTML += `
         <div class="h-full pt-[90px] pb-[100px] pb-4 mt-5 flex flex-col flex-wrap-reverse place-content-center text-center items-center">
             <div id="gs-section">
-                <p id="bi" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-5 font-bold">Supported Brand & Device</p>
+                <p id="bi" class="text-red-300 text-2xl md:text-4xl ml-7 mr-7 mb-5 font-bold">Supported Brand & Device</p>
                 <p id="supported" class="text-white text-7xl md:text-9xl ml-7 mr-7 mb-5 font-bold">69.420*</p>
                 <p class="text-xs mb-4 md:text-base text-gray-500"> From: Vibr*ator, Philips, Samsung, Polytron and other.</p>
             </div>
@@ -64,7 +64,7 @@ export async function render_home() {
         // Card section: Feature
         app.innerHTML += `
         <div class="bg-[#2e2e2e] h-full pt-[90px] pb-[100px] pb-4 mt-5">
-            <p id="ft" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">Feature</p>
+            <p id="ft" class="text-red-300 text-2xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">Feature</p>
             <div id="card-feature" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center lg:mx-auto lg:w-fit">
             </div>
         </div>
@@ -73,7 +73,7 @@ export async function render_home() {
         // Card section: Review
         app.innerHTML += `
         <div class="bg-[#1e1e1e] h-full pt-[90px] pb-[100px] pb-4 mt-5">
-            <p id="rv" class="text-red-300 text-xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">What people says</p>
+            <p id="rv" class="text-red-300 text-2xl md:text-4xl ml-7 mr-7 mb-10 font-bold text-center">What people says</p>
             <div id="card-review"
                  class="mx-auto w-[80%] flex flex-row gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4">
             </div>
@@ -187,7 +187,7 @@ export async function render_home() {
             const newCard = create_card().obj;
             newCard.classList.remove("lg:w-[240px]");
             newCard.classList.remove("s:w-[160px]");
-            newCard.classList.add("flex", "flex-col", "place-content-between", "s:w-[80%]", "snap-start");
+            newCard.classList.add("flex", "flex-col", "place-content-between", "s:w-[80%]", "h-[250px]", "snap-start");
 
             newCard.style.minWidth = "40%";
             newCard.style.scrollSnapAlign = "start";
