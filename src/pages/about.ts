@@ -1,3 +1,5 @@
+import { addClassFromArray } from "../helper.js";
+
 export function render_about() {
     const app = document.getElementById("app");
     if (!app) return;
@@ -155,7 +157,7 @@ export function render_about() {
     const valuesSection = document.createElement("div");
     valuesSection.innerHTML = `<h2 class="text-4xl font-bold text-center mb-8 text-red-300 pb-2">Our Values</h2>`;
     const valueGrid = document.createElement("div");
-    valueGrid.classList.add("grid", "sm:grid-cols-2", "md:grid-cols-3", "gap-6");
+    valueGrid.classList.add("grid", "sm:grid-cols-2", "md:grid-cols-3", "gap-6", "m-10");
 
     for (const val of values) {
         const box = document.createElement("div");
@@ -166,6 +168,19 @@ export function render_about() {
 
     valuesSection.appendChild(valueGrid);
     wrapper.appendChild(valuesSection);
+
+
+    const bwrapper = document.createElement("div");
+    bwrapper.classList.add("text-center", "w-full");
+    const classForEntry = ["p-4", "hover:text-[#2e2e2e]", "hover:bg-red-300", "cursor-pointer", "text-lg", "transition-colors", "duration-200", "text-center"];
+    const portofolioLink = document.createElement("a");
+    addClassFromArray(portofolioLink, classForEntry);
+    portofolioLink.setAttribute('data-link', "");
+    portofolioLink.href = "/portofolio"
+    portofolioLink.innerHTML = "Checkout more of our Stories here.";
+
+    bwrapper.appendChild(portofolioLink);
+    wrapper.appendChild(bwrapper);
 
     // --- Attach to DOM ---
     app.appendChild(wrapper);

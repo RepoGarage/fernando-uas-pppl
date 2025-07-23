@@ -791,15 +791,13 @@ function initializeFiltering(): void {
                 
                 // Remove active class from all buttons
                 filterButtons.forEach(btn => {
-                    btn.classList.remove('bg-red-300');
-                    btn.classList.remove('text-[#1e1e1e]');
+                    btn.classList.remove('bg-green-700');
                     btn.classList.add('bg-[#333333]');
                 });
                 
                 // Add active class to clicked button
                 button.classList.remove('bg-[#333333]');
                 button.classList.add('bg-green-700');
-                button.classList.add('text-[#1e1e1e]');
                 
                 // Filter services based on category
                 serviceCards.forEach(card => {
