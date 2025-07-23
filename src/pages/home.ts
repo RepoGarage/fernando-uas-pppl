@@ -244,16 +244,23 @@ export async function render_home() {
             cardRevDiv.appendChild(newCard);
         }
     }
+
     let currentIndex = 0;
     const cardContainer = document.getElementById("card-review");
 
     if (cardContainer) {
         const cards = cardContainer.children;
+        let currentIndex = 0;
+
         setInterval(() => {
             currentIndex = (currentIndex + 1) % cards.length;
-            const card = cards[currentIndex];
+            const card = cards[currentIndex] as HTMLElement;
+
             if (card) {
-                card.scrollIntoView({ behavior: "smooth", inline: "start" });
+                cardContainer.scrollTo({
+                    behavior: "smooth",
+                    left: card.offsetLeft
+                });
             }
         }, 3000); // 3 seconds
     }
