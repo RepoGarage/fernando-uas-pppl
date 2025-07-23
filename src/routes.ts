@@ -1,10 +1,12 @@
 import { Route } from "./interface.js";
 import { render_home } from "./pages/home.js";
 import { render_about } from "./pages/about.js";
+import { render_services } from "./pages/services.js";
 
 export const ROUTES: Route[] = [
-    { title: "Slope Homepage", route: "/",      callback: () => { render_home(); } },
-    { title: "Slope About", route: "/about", callback: () => { render_about(); } },
+    { title: "Slope Homepage", route: "/",         callback: () => { render_home(); } },
+    { title: "Slope About",    route: "/about",    callback: () => { render_about(); } },
+    { title: "Slope Services", route: "/services", callback: () => { render_services(); } },
 ];
 
 export function render_404() {

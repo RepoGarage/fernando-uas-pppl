@@ -19,7 +19,7 @@ export function create_header(): Component {
     // LINK CONTAINER
     const linkContainer = document.createElement("div");
     container.appendChild(linkContainer);
-    const classForEntry = ["m-2", "hover:font-bold", "hover:text-[#2e2e2e]", "cursor-pointer", "text-lg", "transition-colors", "duration-200"];
+    const classForEntry = ["m-5", "hover:font-bold", "hover:text-[#2e2e2e]", "cursor-pointer", "text-lg", "transition-colors", "duration-200"];
 
     // HOME LINK
     const homeLink = document.createElement("a");
@@ -28,6 +28,14 @@ export function create_header(): Component {
     homeLink.href = "/"
     homeLink.innerHTML = "Home";
     linkContainer.appendChild(homeLink);
+
+    // SERVICE LINK
+    const serviceLink = document.createElement("a");
+    addClassFromArray(serviceLink, classForEntry);
+    serviceLink.setAttribute('data-link', "");
+    serviceLink.href = "/services"
+    serviceLink.innerHTML = "Product";
+    linkContainer.appendChild(serviceLink);
 
     // ABOUT LINK
     const aboutLink = document.createElement("a");

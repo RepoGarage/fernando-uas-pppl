@@ -1,4 +1,3 @@
-import { create_header } from "./component/header.js";
 import { render, navigate } from "./helper.js";
 
 document.addEventListener("DOMContentLoaded", () => {
