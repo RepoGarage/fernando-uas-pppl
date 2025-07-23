@@ -798,7 +798,7 @@ function initializeFiltering(): void {
                 
                 // Add active class to clicked button
                 button.classList.remove('bg-[#333333]');
-                button.classList.add('bg-red-300');
+                button.classList.add('bg-green-700');
                 button.classList.add('text-[#1e1e1e]');
                 
                 // Filter services based on category
