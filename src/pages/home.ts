@@ -37,6 +37,7 @@ export async function render_home() {
             <div id="gs-section">
                 <h1 id="gs" class="text-red-300 text-4xl ml-7 mr-7 mb-10 font-bold">Get Started</h1>
                 <ol style="list-style: decimal; margin-left: 1.5rem;">
+                    <li class="text-lg mt-4 ml-7 mr-7 p-0">Subscribe and select plan of our services.</li>
                     <li class="text-lg mt-4 ml-7 mr-7 p-0">Choose the smart devices you want to connect.</li>
                     <li class="text-lg mt-4 ml-7 mr-7 p-0">Download our app and link your home network.</li>
                     <li class="text-lg mt-4 ml-7 mr-7 p-0">Customize routines and control everything from your phone or voice.</li>
@@ -275,7 +276,7 @@ export async function render_home() {
     });
 
     const gsSection = document.getElementById("gs-section");
-    const gsnButton = create_button("Get Started FR Now", () => { navigate("/blabla"); }).obj
+    const gsnButton = create_button("Get Started FR Now", () => { navigate("/services"); }).obj
     const newClass = ["mt-7", "ml-7"];
     addClassFromArray(gsnButton, newClass);
     gsSection?.appendChild(gsnButton);
