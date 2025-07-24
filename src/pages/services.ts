@@ -158,7 +158,7 @@ function createFilterableServiceCatalog(
     servicesGrid.id = "services-grid";
     servicesGrid.classList.add(
         "grid", "grid-cols-1", "md:grid-cols-2", "lg:grid-cols-3",
-        "gap-6"
+        "gap-6", "ignore-me"
     );
 
     // Create service cards
@@ -167,7 +167,7 @@ function createFilterableServiceCatalog(
         card.dataset.category = service.category;
         card.classList.add(
             "bg-[#2e2e2e]", "rounded-lg", "p-6", "flex", "flex-col",
-            "transition-all", "hover:shadow-lg", "hover:shadow-red-300/20"
+            "transition-all", "hover:shadow-lg", "hover:shadow-red-300/20", "ignore-me"
         );
 
         // Popular badge if applicable
@@ -210,7 +210,7 @@ function createFilterableServiceCatalog(
             // Checkmark icon
             const checkmark = document.createElement("span");
             checkmark.textContent = "✓";
-            checkmark.classList.add("text-green-500", "mr-2", "font-bold");
+            checkmark.classList.add("text-red-300", "mr-2", "font-bold");
             
             featureItem.appendChild(checkmark);
             featureItem.appendChild(document.createTextNode(feature));
@@ -478,7 +478,7 @@ function createComparisonTable(
             } else {
                 const x = document.createElement("span");
                 x.textContent = "×";
-                x.classList.add("text-red-500", "text-xl");
+                x.classList.add("text-red-400", "text-xl");
                 td.appendChild(x);
             }
             
@@ -791,13 +791,19 @@ function initializeFiltering(): void {
                 
                 // Remove active class from all buttons
                 filterButtons.forEach(btn => {
-                    btn.classList.remove('bg-green-700');
-                    btn.classList.add('bg-[#333333]');
+                    if (!btn.classList.contains("ignore-me")) {
+                        btn.classList.remove('bg-red-300');
+                        btn.classList.remove('text-[#1e1e1e]');
+                        btn.classList.add('bg-[#333333]');
+                    }
                 });
                 
                 // Add active class to clicked button
-                button.classList.remove('bg-[#333333]');
-                button.classList.add('bg-green-700');
+                if (!button.classList.contains("ignore-me")) {
+                    button.classList.remove('bg-[#333333]');
+                    button.classList.add('bg-red-300');
+                    button.classList.add('text-[#1e1e1e]');
+                }
                 
                 // Filter services based on category
                 serviceCards.forEach(card => {
