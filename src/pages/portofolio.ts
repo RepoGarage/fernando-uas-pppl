@@ -482,11 +482,15 @@ function initializeEventListeners(projects: any[]): void {
             button.addEventListener("click", () => {
                 // Update active state
                 categoryButtons.forEach(btn => {
-                    btn.classList.remove("bg-red-300");
-                    btn.classList.remove("text-[#1e1e1e]");
+                    if (!btn.classList.contains("project-card")) {
+                        btn.classList.remove("bg-red-300");
+                        btn.classList.remove("text-[#1e1e1e]");
+                    }
                 });
-                button.classList.add("bg-red-300");
-                button.classList.add("text-[#1e1e1e]");
+                if (!button.classList.contains("project-card")) {
+                    button.classList.add("bg-red-300");
+                    button.classList.add("text-[#1e1e1e]");
+                }
                 
                 filterProjects();
             });
@@ -496,13 +500,16 @@ function initializeEventListeners(projects: any[]): void {
             button.addEventListener("click", () => {
                 // Update active state
                 industryButtons.forEach(btn => {
-                    btn.classList.remove("bg-red-300");
-                    btn.classList.remove("text-[#1e1e1e]");
+                    if (!btn.classList.contains("project-card")) {
+                        btn.classList.remove("bg-red-300");
+                        btn.classList.remove("text-[#1e1e1e]");
+                    }
                 });
-                button.classList.add("bg-red-300");
-                button.classList.add("text-[#1e1e1e]");
+                if (!button.classList.contains("project-card")) {
+                    button.classList.add("bg-red-300");
+                    button.classList.add("text-[#1e1e1e]");
+                }
                 
-                filterProjects();
             });
         });
         
@@ -617,6 +624,7 @@ function filterProjects(): void {
         }
     });
 }
+
 
 function openProjectModal(project: any): void {
     const modalContent = document.getElementById("project-modal-content");
